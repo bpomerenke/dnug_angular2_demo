@@ -7,6 +7,7 @@
     <li *ngFor="let item of getExpectedUsage()" class="list-group-item" [ngClass]="{'disabled' : itemInPast(item) }">
         <div>
             {{item.title}} ({{item.startDate}} to {{item.endDate}}): {{item.hoursUsed | number : '1.2-2'}}
+            <button class="btn" (click)="edit(item)">Edit</button>
         </div>
     </li>
 </ul>

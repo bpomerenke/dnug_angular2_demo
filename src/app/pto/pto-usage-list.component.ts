@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { PtoUsage } from '../pto/pto-usage';
+import { PtoUsageModal } from '../pto/pto-usage-modal';
 import { PtoUsageService } from '../services/pto-usage.service';
 import { AppConstants } from '../app-constants'; 
 
@@ -14,7 +17,12 @@ export class PtoUsageListComponent implements OnInit {
   currentPtoUsage: PtoUsage [] = [];
   ptoViewType = 'Events';  
   
-  constructor(private ptoUsageService:PtoUsageService){}
+  constructor(private ptoUsageService:PtoUsageService, private modal: NgbModal){}
+
+  edit(item: PtoUsage) {
+    const modalRef = this.modal.open(PtoUsageModal);
+    modalRef.componentInstance.modalTitle = "Edit Item";
+  }
 
   ngOnInit() : void {
     this.ptoUsageService.getPtoUsage().then((usage) => {
