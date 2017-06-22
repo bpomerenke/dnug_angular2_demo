@@ -1,16 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { ChartsModule } from 'ng2-charts';
+import { PtoUsageService } from './services/pto-usage.service'
 import { AppComponent } from './app.component';
+import { PtoUsageChartComponent } from './pto/pto-usage-chart.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PtoUsageChartComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ChartsModule
   ],
-  providers: [],
+  providers: [PtoUsageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
