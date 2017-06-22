@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PtoUsageService } from '../services/pto-usage.service'
+import { PtoUsageService } from '../services/pto-usage.service';
 import { AppConstants } from '../app-constants'; 
 
 @Component({

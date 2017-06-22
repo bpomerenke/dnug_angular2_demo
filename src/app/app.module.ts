@@ -5,11 +5,13 @@ import { ChartsModule } from 'ng2-charts';
 import { PtoUsageService } from './services/pto-usage.service'
 import { AppComponent } from './app.component';
 import { PtoUsageChartComponent } from './pto/pto-usage-chart.component'
+import { PtoUsageListComponent } from './pto/pto-usage-list.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    PtoUsageChartComponent
+    PtoUsageChartComponent,
+    PtoUsageListComponent
   ],
   imports: [
     BrowserModule,

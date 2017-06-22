@@ -1,0 +1,12 @@
+<h5>Used / Planned PTO</h5>
+<h6>  
+    <button class="btn" (click)="togglePtoView('Events')" [ngClass]="{ 'btn-success' :isViewType('Events') }">Events</button>
+    <button class="btn" (click)="togglePtoView('Months')" [ngClass]="{ 'btn-success' : isViewType('Months') }">Months</button>
+</h6>
+<ul class="list-group">
+    <li *ngFor="let item of getExpectedUsage()" class="list-group-item" [ngClass]="{'disabled' : itemInPast(item) }">
+        <div>
+            {{item.title}} ({{item.startDate}} to {{item.endDate}}): {{item.hoursUsed | number : '1.2-2'}}
+        </div>
+    </li>
+</ul>
