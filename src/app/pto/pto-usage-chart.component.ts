@@ -69,4 +69,33 @@ export class PtoUsageChartComponent implements OnInit {
       this.lineChartData = [upToNow, actual, accrual, maxCarryOver];
     });
   }
+
+  
+  refreshChart(): Function {
+    return () => { this.projectOutData(); }
+  }
+    
+  chartX = 0;
+  chartY = 0; 
+  chartDate = new Date();
+  chartWidth = 0;
+  // events
+  chartClicked(e:any):void {
+    console.log(e.event);
+    let x = e.event.offsetX;
+    let y = e.event.offsetY;
+    
+    let width = e.event.target.clientWidth;
+
+    let percent = (x - 30) / (width - 45);
+    let date = new Date(new Date().getFullYear(), 0)
+    date.setDate(percent * 365);
+
+    console.log(percent, date); 
+
+    this.chartX = x;
+    this.chartY = y;
+    this.chartDate = date;    
+    this.chartWidth = width;
+  }
 }
