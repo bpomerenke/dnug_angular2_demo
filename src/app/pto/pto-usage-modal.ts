@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit } from '@angular/core';
 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,12 +12,13 @@ import { PtoUsage } from '../pto/pto-usage';
 
 export class PtoUsageModal {
     modalTitle = "Add / Edit Item";
+    item: PtoUsage = new PtoUsage();
 
     constructor(private activeModal: NgbActiveModal){
 
     }
 
     close() {
-        this.activeModal.close('closed');
+        this.activeModal.close(this.item);
     }
 }

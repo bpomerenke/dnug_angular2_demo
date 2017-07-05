@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { ChartsModule } from 'ng2-charts';
@@ -19,6 +20,7 @@ import { PtoUsageModal } from './pto/pto-usage-modal';
   entryComponents: [PtoUsageModal],
   imports: [
     BrowserModule,
+    FormsModule,
     ChartsModule,
     NgbModule.forRoot()
   ],

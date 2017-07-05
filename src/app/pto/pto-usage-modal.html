@@ -1,3 +1,14 @@
-<h2>{{modalTitle}}</h2>
-
-<button class="btn" (click)="close()">Close</button>
+<div class="modal-header">
+    <h4 class="modal-title">{{modalTitle}}</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Title</label>
+            <input type="text" id="title" name="title" [(ngModel)]="item.title"/>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" (click)="close()">Close</button>
+</div>
