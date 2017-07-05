@@ -22,6 +22,7 @@ export class PtoUsageListComponent implements OnInit {
   edit(item: PtoUsage) {
     const modalRef = this.modal.open(PtoUsageModal);
     modalRef.componentInstance.modalTitle = "Edit Item";
+    modalRef.componentInstance.item = item;
 
     modalRef.result.then((result)=>{
       console.log('result:', result);
