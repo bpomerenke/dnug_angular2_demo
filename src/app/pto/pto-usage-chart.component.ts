@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable'
 
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
+import { PtoUsage } from '../pto/pto-usage';
+import { PtoUsageModal } from '../pto/pto-usage-modal';
 import { PtoUsageService } from '../services/pto-usage.service';
 import { AppConstants } from '../app-constants'; 
+import { ModalUtilities } from '../modal-utilities';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +16,7 @@ import { AppConstants } from '../app-constants';
 })
 
 export class PtoUsageChartComponent implements OnInit {
-  constructor(private ptoUsageService: PtoUsageService){
+  constructor(private ptoUsageService: PtoUsageService, private modal: NgbModal){
 
   }
 
@@ -103,5 +108,16 @@ export class PtoUsageChartComponent implements OnInit {
     this.chartY = y;
     this.chartDate = date;    
     this.chartWidth = width;
+
+    const modalRef = this.modal.open(PtoUsageModal);
+    modalRef.componentInstance.modalTitle = "Add Item";
+    modalRef.componentInstance.item = { startDate: date.getMonth() + '-' + date.getDay() + '-' + date.getFullYear() };
+    modalRef.result.then((result) => {
+      this.ptoUsageService.addPto(result);
+    }, (reason) => {
+      console.log(`Dismissed ${ModalUtilities.getDismissReason(reason)}`);
+    });
   }
+
+
 }

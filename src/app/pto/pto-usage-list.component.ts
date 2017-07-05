@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { PtoUsage } from '../pto/pto-usage';
 import { PtoUsageModal } from '../pto/pto-usage-modal';
 import { PtoUsageService } from '../services/pto-usage.service';
 import { AppConstants } from '../app-constants'; 
+import { ModalUtilities } from '../modal-utilities';
 
 @Component({
   moduleId: module.id,
@@ -31,7 +32,7 @@ export class PtoUsageListComponent implements OnInit {
     modalRef.result.then((result) => {
       this.ptoUsageService.updatePto(result);
     }, (reason) => {
-      console.log(`Dismissed ${this.getDismissReason(reason)}`);
+      console.log(`Dismissed ${ModalUtilities.getDismissReason(reason)}`);
     });
   }
 
@@ -41,19 +42,10 @@ export class PtoUsageListComponent implements OnInit {
     modalRef.result.then((result) => {
       this.ptoUsageService.addPto(result);
     }, (reason) => {
-      console.log(`Dismissed ${this.getDismissReason(reason)}`);
+      console.log(`Dismissed ${ModalUtilities.getDismissReason(reason)}`);
     })
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
   ngOnInit() : void {
     this.ptoUsageService.getPtoUsage().then((usage) => {
       this.currentPtoUsage = usage;
