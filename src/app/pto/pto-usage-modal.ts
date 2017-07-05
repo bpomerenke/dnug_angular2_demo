@@ -18,7 +18,10 @@ export class PtoUsageModal {
 
     }
 
-    close() {
+    save() {
         this.activeModal.close(this.item);
+    }
+    close() {
+        this.activeModal.dismiss('cancel');
     }
 }

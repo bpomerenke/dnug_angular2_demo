@@ -22,4 +22,14 @@ export class PtoUsageService {
     getPtoUsage() : Promise<PtoUsage[]> {
         return Promise.resolve(this.currentPtoUsage);
     }
+
+    updatePto(item: PtoUsage) : Promise<PtoUsage> {
+        let itemToUpdate = this.currentPtoUsage.filter(ptoUsage=>ptoUsage.id === item.id)[0];
+        itemToUpdate.title = item.title;
+        itemToUpdate.hoursUsed = item.hoursUsed;
+        itemToUpdate.startDate = item.startDate;
+        itemToUpdate.endDate = item.endDate;
+
+        return Promise.resolve(item);
+    }
 }

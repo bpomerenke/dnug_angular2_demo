@@ -1,5 +1,8 @@
 <div class="modal-header">
     <h4 class="modal-title">{{modalTitle}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 <div class="modal-body container">
     <form class="form-horizontal">
@@ -30,5 +33,6 @@
     </form>
 </div>
 <div class="modal-footer">
+    <button class="btn btn-success" (click)="save()">Save</button>
     <button class="btn" (click)="close()">Close</button>
 </div>

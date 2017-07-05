@@ -29,7 +29,7 @@ export class PtoUsageListComponent implements OnInit {
                                         hoursUsed: item.hoursUsed };
 
     modalRef.result.then((result) => {
-      console.log('result:', result);
+      this.ptoUsageService.updatePto(result);
     }, (reason) => {
       console.log(`Dismissed ${this.getDismissReason(reason)}`);
     });
