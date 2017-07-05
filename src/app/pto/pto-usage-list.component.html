@@ -3,11 +3,18 @@
     <button class="btn" (click)="togglePtoView('Events')" [ngClass]="{ 'btn-success' :isViewType('Events') }">Events</button>
     <button class="btn" (click)="togglePtoView('Months')" [ngClass]="{ 'btn-success' : isViewType('Months') }">Months</button>
 </h6>
-<ul class="list-group">
-    <li *ngFor="let item of getExpectedUsage()" class="list-group-item" [ngClass]="{'disabled' : itemInPast(item) }">
-        <div>
-            {{item.title}} ({{item.startDate}} to {{item.endDate}}): {{item.hoursUsed | number : '1.2-2'}}
-            <button class="btn" (click)="edit(item)">Edit</button>
+<div class="list-group">
+    <div *ngFor="let item of getExpectedUsage()" 
+         class="list-group-item flex-column align-items-start"
+         [ngClass]="{'disabled' : itemInPast(item) }">
+
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{item.title}}</h5>
+            <small>
+                {{item.hoursUsed | number : '1.2-2'}} hours
+                <button (click)="edit(item)">Edit</button>
+            </small>
         </div>
-    </li>
-</ul>
+        <small>{{item.startDate}} to {{item.endDate}}</small>
+    </div>
+</div>
