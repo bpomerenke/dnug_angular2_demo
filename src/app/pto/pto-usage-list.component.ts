@@ -35,6 +35,16 @@ export class PtoUsageListComponent implements OnInit {
     });
   }
 
+  add() {
+    const modalRef = this.modal.open(PtoUsageModal);
+    modalRef.componentInstance.modalTitle = "Add Item";
+    modalRef.result.then((result) => {
+      this.ptoUsageService.addPto(result);
+    }, (reason) => {
+      console.log(`Dismissed ${this.getDismissReason(reason)}`);
+    })
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

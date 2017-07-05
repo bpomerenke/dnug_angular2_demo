@@ -17,4 +17,7 @@
         </div>
         <small>{{item.startDate}} to {{item.endDate}}</small>
     </div>
+    <div *ngIf="isViewType('Events')">
+        <button class="btn" (click)="add()">Add</button>
+    </div>
 </div>

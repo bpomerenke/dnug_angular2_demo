@@ -32,4 +32,9 @@ export class PtoUsageService {
 
         return Promise.resolve(item);
     }
+
+    addPto(item:PtoUsage) : Promise<PtoUsage> {
+        this.currentPtoUsage.push(item);
+        return Promise.resolve(item);
+    }
 }
