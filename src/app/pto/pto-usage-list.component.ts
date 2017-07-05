@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { PtoUsage } from '../pto/pto-usage';
 import { PtoUsageModal } from '../pto/pto-usage-modal';
@@ -22,13 +22,28 @@ export class PtoUsageListComponent implements OnInit {
   edit(item: PtoUsage) {
     const modalRef = this.modal.open(PtoUsageModal);
     modalRef.componentInstance.modalTitle = "Edit Item";
-    modalRef.componentInstance.item = item;
+    modalRef.componentInstance.item = { id: item.id, 
+                                        title: item.title, 
+                                        startDate: item.startDate, 
+                                        endDate:item.endDate, 
+                                        hoursUsed: item.hoursUsed };
 
-    modalRef.result.then((result)=>{
+    modalRef.result.then((result) => {
       console.log('result:', result);
-    })
+    }, (reason) => {
+      console.log(`Dismissed ${this.getDismissReason(reason)}`);
+    });
   }
 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
   ngOnInit() : void {
     this.ptoUsageService.getPtoUsage().then((usage) => {
       this.currentPtoUsage = usage;
