@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable'
+
 import { PtoUsageService } from '../services/pto-usage.service';
 import { AppConstants } from '../app-constants'; 
 
@@ -16,6 +18,10 @@ export class PtoUsageChartComponent implements OnInit {
   ngOnInit() : void {
     this.months = AppConstants.monthLabels;
     this.projectOutData();
+    this.ptoUsageService.dataUpdated.asObservable().subscribe(()=>{
+      console.log('refreshing chart');
+      this.projectOutData();
+    });
   }
 
   lineChartData:Array<any> = [

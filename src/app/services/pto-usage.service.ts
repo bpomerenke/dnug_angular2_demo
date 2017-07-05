@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject'
 import { PtoUsage } from '../pto/pto-usage'
 
 export class PtoUsageService {
@@ -18,6 +19,8 @@ export class PtoUsageService {
       {id: 11, startDate: '8-18-17', endDate: '8-18-17', hoursUsed: 8, title: 'nate wedding'}, 
       {id: 12, startDate: '12-25-17', endDate: '12-31-17', hoursUsed: 24, title: 'holidays'}
     ];
+
+    dataUpdated: Subject<boolean> = new Subject<boolean>();
     
     getPtoUsage() : Promise<PtoUsage[]> {
         return Promise.resolve(this.currentPtoUsage);
@@ -30,11 +33,16 @@ export class PtoUsageService {
         itemToUpdate.startDate = item.startDate;
         itemToUpdate.endDate = item.endDate;
 
+        console.log('updating ', itemToUpdate, "with: ", item);
+
+        this.dataUpdated.next(true);
         return Promise.resolve(item);
     }
 
     addPto(item:PtoUsage) : Promise<PtoUsage> {
         this.currentPtoUsage.push(item);
+
+        this.dataUpdated.next(true);
         return Promise.resolve(item);
     }
 }
