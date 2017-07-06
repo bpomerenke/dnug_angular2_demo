@@ -39,7 +39,14 @@ export class PtoUsageChartComponent implements OnInit {
   months:Array<string> = [];
 
   lineChartOptions:any = {
-    responsive: true
+    responsive: true,
+    scales: {
+      xAxes: [
+        {
+          time: { units: 'month'}
+        }
+      ]
+    }
   };
   lineChartColors:Array<any> = [ AppConstants.chartGreyOpaque, AppConstants.chartGrey, AppConstants.chartLightGrey, AppConstants.chartRed ];
 

@@ -1,8 +1,9 @@
-<h5>Used / Planned PTO</h5>
-<h6>  
+<h6>
+    Used / Planned PTO  
     <button class="btn" (click)="togglePtoView('Events')" [ngClass]="{ 'btn-success' :isViewType('Events') }">Events</button>
     <button class="btn" (click)="togglePtoView('Months')" [ngClass]="{ 'btn-success' : isViewType('Months') }">Months</button>
 </h6>
+<div style="overflow-y:scroll; height: 400px;">
 <div class="list-group">
     <div *ngFor="let item of getExpectedUsage()" 
          class="list-group-item flex-column align-items-start"
@@ -17,7 +18,8 @@
         </div>
         <small>{{item.startDate}} to {{item.endDate}}</small>
     </div>
-    <div *ngIf="isViewType('Events')">
-        <button class="btn" (click)="add()">Add</button>
-    </div>
+</div>
+</div>
+<div *ngIf="isViewType('Events')" style="text-align: right; padding: 5px;">
+    <button class="btn btn-success" (click)="add()">Add Event</button>
 </div>
