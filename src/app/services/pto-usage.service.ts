@@ -1,6 +1,10 @@
-import { Subject } from 'rxjs/Subject'
-import { PtoUsage } from '../pto/pto-usage'
+import { Injectable } from '@angular/core';
+import { Headers, Http, Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { Subject } from 'rxjs/Subject';
+import { PtoUsage } from '../pto/pto-usage';
 
+@Injectable()
 export class PtoUsageService {
     private currentPtoUsage = [
       {id: 1, startDate: '1-13-17', endDate: '1-13-17', hoursUsed: 4, title: '???'},
@@ -22,8 +26,16 @@ export class PtoUsageService {
 
     dataUpdated: Subject<boolean> = new Subject<boolean>();
     
+    constructor(private http: Http){
+
+    }
+
     getPtoUsage() : Promise<PtoUsage[]> {
-        return Promise.resolve(this.currentPtoUsage);
+        return this.http.get('http://localhost:5000/api/ptousage')
+            .toPromise()
+            .then(response => {
+                return response.json() as PtoUsage[]
+            });
     }
 
     updatePto(item: PtoUsage) : Promise<PtoUsage> {
