@@ -39,16 +39,12 @@ export class PtoUsageService {
     }
 
     updatePto(item: PtoUsage) : Promise<PtoUsage> {
-        let itemToUpdate = this.currentPtoUsage.filter(ptoUsage=>ptoUsage.id === item.id)[0];
-        itemToUpdate.title = item.title;
-        itemToUpdate.hoursUsed = item.hoursUsed;
-        itemToUpdate.startDate = item.startDate;
-        itemToUpdate.endDate = item.endDate;
-
-        console.log('updating ', itemToUpdate, "with: ", item);
-
-        this.dataUpdated.next(true);
-        return Promise.resolve(item);
+        return this.http.put(`http://localhost:5000/api/ptousage/${item.id}`, item)
+            .toPromise()
+            .then(()=>{
+                this.dataUpdated.next(true);
+                return item;
+            });
     }
 
     addPto(item:PtoUsage) : Promise<PtoUsage> {
