@@ -47,11 +47,18 @@ export class PtoUsageListComponent implements OnInit {
   }
 
   ngOnInit() : void {
+    this.refreshData();
+    this.ptoUsageService.dataUpdated.asObservable().subscribe(()=>{
+      this.refreshData();
+    });
+  }
+  
+  refreshData() {
     this.ptoUsageService.getPtoUsage().then((usage) => {
       this.currentPtoUsage = usage;
     });
   }
-  
+
   togglePtoView(viewType: string){
     this.ptoViewType = viewType;
   }
